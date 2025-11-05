@@ -4,6 +4,7 @@
   "description": "Playwright E2E tests for Dummy QA App - AI Test Healing Validation",
   "scripts": {
     "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",

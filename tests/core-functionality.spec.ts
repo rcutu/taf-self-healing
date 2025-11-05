@@ -17,7 +17,7 @@ test.describe('Login', () => {
     await loginPage.goto();
   });
 
-  test('should login successfully with stable selectors', async ({ page }) => {
+  test('@smoke should login successfully with stable selectors', async ({ page }) => {
     await loginPage.login(TEST_USERS.login.email, TEST_USERS.login.password);
     await expect(page).toHaveURL(/.*dashboard/);
   });
@@ -36,7 +36,7 @@ test.describe('Dashboard', () => {
     await dashboardPage.goto();
   });
 
-  test('should display user table with stable selectors', async () => {
+  test('@smoke should display user table with stable selectors', async () => {
     await expect(dashboardPage.userTable).toBeVisible();
     const userCount = await dashboardPage.getUserCount();
     expect(userCount).toBeGreaterThanOrEqual(3);
@@ -48,7 +48,7 @@ test.describe('Dashboard', () => {
     expect(headers).toEqual(UI_TEXT.initial.tableHeaders);
   });
 
-  test('should add new user successfully', async ({ page }) => {
+  test('@smoke should add new user successfully', async ({ page }) => {
     const userModal = new UserModal(page);
     const initialCount = await dashboardPage.getUserCount();
     
@@ -76,7 +76,7 @@ test.describe('User Modal', () => {
     await dashboardPage.goto();
   });
 
-  test('should open and close modal with stable selectors', async () => {
+  test('@smoke should open and close modal with stable selectors', async () => {
     await dashboardPage.addUserButton.click();
     await expect(userModal.modalBackdrop).toBeVisible();
     

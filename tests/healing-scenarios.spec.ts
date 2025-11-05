@@ -19,7 +19,7 @@ test.describe('Healing Scenario 1: Login Button Text Change', () => {
     await expect(button).toBeVisible();
   });
 
-  test('using data-testid - STABLE', async ({ page }) => {
+  test('@smoke using data-testid - STABLE', async ({ page }) => {
     await page.goto('/login');
     
     // This will NOT break when Change #1 is applied
