@@ -22,13 +22,16 @@ This framework demonstrates:
 npm install
 npx playwright install
 
-# Run all tests
+# Run smoke tests (5 critical tests, ~2 min)
+npm run test:smoke
+
+# Run all tests (75 tests, ~15 min)
 npm test
 
 # Run with UI (recommended for debugging)
 npm run test:ui
 
-# Run specific tests
+# Run specific test suites
 npm run test:core
 npm run test:healing
 ```
@@ -46,6 +49,16 @@ tests/
 ```
 
 ## Test Categories
+
+### Smoke Tests (5 tests tagged with @smoke)
+Fast, critical tests that run in CI on every push:
+- ✅ Login successfully
+- ✅ Display user table
+- ✅ Add new user
+- ✅ Open/close modal
+- ✅ Stable selector patterns
+
+**Run**: `npm run test:smoke` (~2 minutes, runs on all 3 browsers = 15 tests)
 
 ### Core Functionality (7 tests per browser = 21 total)
 Essential tests covering main features:
@@ -139,7 +152,7 @@ Visit `/dev` and click "Reset All Changes"
 
 ## GitHub Actions CI/CD
 
-Tests run automatically on:
+**Smoke tests** run automatically on:
 - Push to main/master/develop
 - Pull requests
 - Manual trigger
@@ -149,13 +162,27 @@ View results: **Actions** tab in GitHub
 ### Workflow Configuration
 `.github/workflows/playwright.yml`
 - Runs on Ubuntu latest
-- Tests all browsers (Chromium, Firefox, WebKit)
+- Executes 5 smoke tests on all 3 browsers (15 tests total)
+- Faster execution (~2 minutes vs ~15 minutes for full suite)
+- 15-second timeout per test
 - Uploads test reports and videos
 - 30-day retention for reports
+
+### Run Full Test Suite Locally
+```bash
+# Run all 75 tests
+npm test
+
+# Run full suite in CI mode
+CI=1 npm test
+```
 
 ## Available Commands
 
 ```bash
+# Run smoke tests (recommended for CI/quick checks)
+npm run test:smoke
+
 # Run all tests
 npm test
 
