@@ -29,6 +29,8 @@ jobs:
       
     - name: Run Playwright tests
       run: npm test
+      env:
+        BASE_URL: https://dummy-qa-2e3ed28hd-radus-projects-48232425.vercel.app
       
     - name: Upload test results
       uses: actions/upload-artifact@v4
